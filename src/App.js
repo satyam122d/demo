@@ -1,35 +1,23 @@
 import './App.css';
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Contact from './components/Contact';
 import C from './components/C';
 
 function App() {
-  let component;
-  
-  switch (window.location.pathname) {
-    case '/':
-      component = <Home />;
-      break;
-    case '/contact':
-      component = <Contact />;
-      break;
-    case '/content':
-      component = <C />;
-      break;
-    default:
-      component = <Home />; // default fallback
-      break;
-  }
-
   return (
-    <>
+    <Router basename="/">
       <Navbar />
       <div className="container">
-        {component}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/content" element={<C />} />
+        </Routes>
       </div>
-    </>
+    </Router>
   );
 }
 
